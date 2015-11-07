@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <episerver.shell>
+    <publicModules>
+      <add name="CSharpBrew.UsageReports"  xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)">
+        <assemblies>
+          <add assembly="CSharpBrew.UsageReports" />
+        </assemblies>
+      </add>
+    </publicModules>
+  </episerver.shell>
+</configuration>

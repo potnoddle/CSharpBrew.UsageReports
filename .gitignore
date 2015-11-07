@@ -1,0 +1,8 @@
+##csharpbrew
+obj/
+bin/
+*.nuspec
+*.nuspec.bak
+*.suo
+packages/
+.vs/
