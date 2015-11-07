@@ -1,10 +1,33 @@
 Param (
 	[switch]$Publish,
-	[string]$Configuration
+	[string]$Configuration,
+	[string]$TargetFileName
 )
 
 $ErrorActionPreference = "Stop"
 $global:ExitCode = 1
+
+Function Get-NuSpecTokenProps {
+  $result = ""
+  $Tokens = @{
+    Configuration = $Configuration;
+    TargetFileName = $TargetFileName;
+    year = (Get-Date).Year # year is also custom!
+  }
+  $versionInfo = (Get-ChildItem *.dll -Path ".\bin\$Configuration" -Recurse | Where {$_.Name -match $TargetFileName} | Select-Object -First 1 -ExpandProperty VersionInfo)
+  If ($versionInfo) {
+    $Tokens.author = $versionInfo.CompanyName
+    $Tokens.description = $versionInfo.FileDescription
+    $Tokens.id = $versionInfo.ProductName
+    $Tokens.version = $versionInfo.ProductVersion
+    $Tokens.summary = $versionInfo.ProductName + " " + $versionInfo.ProductVersion
+  }
+
+  foreach ($key in $Tokens.Keys) {
+    $result += "{0}={1};" -f $key, $Tokens[$key]
+  }
+  $result
+}
 
 function Write-Log {
 
@@ -279,10 +302,10 @@ Write-Log " "
 Write-Log "Creating package..." -ForegroundColor Green
 
 # Create symbols package if any .pdb files are located in the lib folder
-$Properties = "Configuration=" + $Configuration
+$Properties = Get-NuSpecTokenProps
 
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
-	$packageTask = Create-Process .\NuGet.exe ("pack -Symbol -Verbosity Detailed -Prop $Properties")
+	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			
@@ -294,7 +317,7 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$global:ExitCode = $packageTask.ExitCode
 }
 Else {
-	$packageTask = Create-Process .\NuGet.exe ("pack -Verbosity Detailed -Prop $Properties")
+	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Verbosity Detailed -Prop $Properties")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			

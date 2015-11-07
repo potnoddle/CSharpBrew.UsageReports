@@ -6,3 +6,4 @@ bin/
 *.suo
 packages/
 .vs/
+*.bak
