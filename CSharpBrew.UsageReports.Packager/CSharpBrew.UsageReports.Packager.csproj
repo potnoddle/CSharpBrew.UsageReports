@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -51,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="UpdateVersion.ps1" />
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />
@@ -79,10 +79,10 @@
   </Target>-->
   <Target Name="AfterBuild">
     <Delete Files=".\NuGet.log" />
-    <Exec WorkingDirectory="$(MSBuildProjectDirectory)" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " ContinueOnError="True" Command="PowerShell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Unrestricted -Command &quot;&amp; {.\NuGetPackage.ps1} &quot;" IgnoreExitCode="true">
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " ContinueOnError="True" Command="PowerShell.exe -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Unrestricted -Command &quot;&amp; {.\NuGetPackage.ps1 -Configuration $(Configuration) } &quot;" IgnoreExitCode="true">
       <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
     </Exec>
-    <Exec WorkingDirectory="$(MSBuildProjectDirectory)" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " ContinueOnError="True" Command="PowerShell.exe -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; {.\NuGetPackage.ps1 -Publish} &quot;" IgnoreExitCode="true">
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " ContinueOnError="True" Command="PowerShell.exe -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command &quot;&amp; {.\NuGetPackage.ps1 -Publish -Configuration $(Configuration) } &quot;" IgnoreExitCode="true">
       <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
     </Exec>
     <Message Text=" " Importance="High" />

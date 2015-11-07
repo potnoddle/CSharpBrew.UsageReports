@@ -257,7 +257,9 @@
     <Content Include="Pages\BackgroundTasksReport.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Pages\ContentByTypeReport.aspx" />
+    <Content Include="Pages\ContentByTypeReport.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Pages\GuiPlugInReport.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

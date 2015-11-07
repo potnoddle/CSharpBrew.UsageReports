@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>CSharpBrew.UsageReports</id>
-    <version>1.0.2.18</version>
+    <version>1.0.2.72</version>
     <title>CSharp Brew UsageReports</title>
     <authors>Paul Graham</authors>
     <owners></owners>
-    <description> A collection of usage reports for episerer. </description>
+    <description>A collection of usage reports for episerer.</description>
     <releaseNotes>
     </releaseNotes>
     <summary>
@@ -20,14 +20,14 @@
     <dependencies>
       <group targetFramework="net40">
         <dependency id="log4net" version="1.2.10" />
-        <dependency id="EPiServer.CMS.Core" version="[7.5.409,9)" />
+        <dependency id="EPiServer.CMS.Core" version="[7.6.0,9)" />
       </group>
     </dependencies>
     <references></references>
     <tags></tags>
   </metadata>
   <files>
-    <file src="bin\Release\CSharpBrew.UsageReports.dll" target="lib\net45" />
+    <file src="bin\$Configuration$\CSharpBrew.UsageReports.dll" target="lib\net45" />
     <file src="..\CSharpBrew.UsageReports\Pages\*.aspx" target="content\modules\CSharpBrew.UsageReports\Pages" />
     <file src="..\CSharpBrew.UsageReports\web.config" target="content\modules\CSharpBrew.UsageReports\" />
     <file src="web.config.*.xdt" target="Content\" />
