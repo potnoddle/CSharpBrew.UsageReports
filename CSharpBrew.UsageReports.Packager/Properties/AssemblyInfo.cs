@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UsageReports.Packager")]
-[assembly: AssemblyDescription("Project template made by EyeCatch (http://www.eyecatch.no/)")]
+[assembly: AssemblyTitle("CSharpBrew.UsageReports.Packager")]
+[assembly: AssemblyDescription("A Set of content types reports.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("UsageReports.Packager")]
-[assembly: AssemblyCopyright("Copyright ?  2015")]
+[assembly: AssemblyCompany("Paul Graham")]
+[assembly: AssemblyProduct("CSharpBrew.UsageReports.Packager")]
+[assembly: AssemblyCopyright("Copyright @ Paul Graham 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.2.88")]
-[assembly: AssemblyVersion("1.0.2.88")]
-[assembly: AssemblyFileVersion("1.0.2.88")]
+// [assembly: AssemblyVersion("1.0.2.92")]
+[assembly: AssemblyVersion("1.0.2.92")]
+[assembly: AssemblyFileVersion("1.0.2.92")]

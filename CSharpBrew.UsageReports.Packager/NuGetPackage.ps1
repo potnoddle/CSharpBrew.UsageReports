@@ -1,12 +1,13 @@
 Param (
 	[switch]$Publish,
-	[string]$Configuration,
-	[string]$TargetFileName
+	[string]$Configuration, 
+	[string]$TargetFileName 
 )
 
 $ErrorActionPreference = "Stop"
 $global:ExitCode = 1
 
+##A function to retrive token to bw used in package.nuspec
 Function Get-NuSpecTokenProps {
   $result = ""
   $Tokens = @{
@@ -272,7 +273,7 @@ function Publish {
 		}
 	}
 }
-
+#increaments the AssemblyInfo.cs version
 . '.\UpdateVersion.ps1'
 
 Write-Log " "
@@ -301,7 +302,7 @@ Write-Log (Invoke-Command {.\NuGet.exe update -Self} -ErrorAction Stop)
 Write-Log " "
 Write-Log "Creating package..." -ForegroundColor Green
 
-# Create symbols package if any .pdb files are located in the lib folder
+#retrives propertied to be replace in the Package.nuspec file.
 $Properties = Get-NuSpecTokenProps
 
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
