@@ -243,16 +243,16 @@ function Publish {
 	Write-Log "Publishing package..." -ForegroundColor Green
 
 	# Get nuget config
-	[xml]$nugetConfig = Get-Content .\NuGet.Config
-	
+	[xml]$nugetConfig = Get-Content ".\NuGet.Config"
+
 	$nugetConfig.configuration.packageSources.add | ForEach-Object {
 		$url = $_.value
 
 		Write-Log "Repository Url: $url"
-		Write-Log " "
 
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
-
+			
+			Write-Log ($_.Name )
 			# Try to push package
 			$task = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
 			$task.Start() | Out-Null
@@ -294,6 +294,7 @@ if (Test-Path *.nupkg) {
 		Write-Log ("Renamed " + $_.Name + " to " + $_.Name + ".bak")
 	}
 }
+$Properties = Get-NuSpecTokenProps
 
 Write-Log " "
 Write-Log "Updating NuGet..." -ForegroundColor Green
@@ -303,9 +304,10 @@ Write-Log " "
 Write-Log "Creating package..." -ForegroundColor Green
 
 #retrives propertied to be replace in the Package.nuspec file.
-$Properties = Get-NuSpecTokenProps
+
 
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
+	Write-Log "pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties"
 	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
@@ -318,7 +320,8 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$global:ExitCode = $packageTask.ExitCode
 }
 Else {
-	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Verbosity Detailed -Prop $Properties")
+	Write-Log "pack Package.nuspec -Verbosity Detailed -Prop ""$Properties"""
+	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Verbosity Detailed -Prop ""$Properties""")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			
