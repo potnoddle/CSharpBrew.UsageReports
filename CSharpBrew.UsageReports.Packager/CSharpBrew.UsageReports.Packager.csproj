@@ -56,7 +56,9 @@
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />
     <None Include="NuGet.exe" />
-    <None Include="NuGet.config" />
+    <None Include="NuGet.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Package.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -66,12 +68,14 @@
     <None Include="Web.config.install.xdt" />
     <None Include="Web.config.uninstall.xdt" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CSharpBrew.UsageReports\CSharpBrew.UsageReports.csproj">
       <Project>{e1c27292-1731-4c8c-a305-80e084d8ee3d}</Project>
       <Name>CSharpBrew.UsageReports</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -31,18 +31,16 @@ namespace CSharpBrew.UsageReports.Pages
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
-            // Use EPiServer UI master page
             MasterPageFile = UriSupport.ResolveUrlFromUIBySettings("MasterPages/EPiServerUI.master");
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            if (!IsPostBack)
+            base.OnLoad(e);
+            if (IsPostBack)
             {
-                // Populate page type dropdown
-                var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
-                var contentTypes = contentTypeRepo.List().OrderBy(t => t.SortOrder);
+                var contentTypes = UsageReportsService.GetContentTypes().OrderBy(t => t.SortOrder);
                 ContentTypes.DataSource = contentTypes.Select(t => new { Value = t.Name, Text = t.DisplayName ?? t.Name });
                 ContentTypes.DataBind();
 
@@ -59,21 +57,8 @@ namespace CSharpBrew.UsageReports.Pages
             var contentTypeName = Request[ContentTypes.UniqueID];
             if (!string.IsNullOrEmpty(contentTypeName))
             {
-                var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
-                var contentType = contentTypeRepo.List().First(c => c.Name == contentTypeName);
-
+                var contentType = UsageReportsService.GetContentTypes().First(c => c.Name == contentTypeName);
                 ReportItems = UsageReportsService.GetPagesByTypeReport(contentType);
-                if (!string.IsNullOrEmpty(Request["r"]))
-                {
-                    switch (Request["r"])
-                    {
-                        case "json":
-                            Response.Write(JsonConvert.SerializeObject(ReportItems));
-                            Response.ContentType = "application/json";
-                            Response.End();
-                            break;
-                    }
-                }
             }
         }
     }

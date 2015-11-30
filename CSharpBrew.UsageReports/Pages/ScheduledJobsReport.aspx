@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="BackgroundTasksReport.aspx.cs" Inherits="CSharpBrew.UsageReports.Pages.BackgroundTasksReport" %>
+﻿<%@ Page Language="C#" CodeBehind="ScheduledJobs.aspx.cs" Inherits="CSharpBrew.UsageReports.Pages.ScheduledJobs" %>
 
 <asp:content contentplaceholderid="FullRegion" runat="Server">
     <div class="epi-contentContainer epi-padding epi-contentArea">
@@ -11,7 +11,7 @@
                    <thead>
                        <tr>
                        <th>
-                           Background Task
+                           scheduledjobs Job
                        </th>
                         <th style="display:none;">
                            Description
@@ -37,7 +37,7 @@
            { %>
                    <tbody>
                    <tr>
-                       <td><%= item.BackGroundTaskName %></td>
+                       <td><%= item.scheduledjobsJobName %></td>
                        <td style="display:none;"><%= item.Description %></td>
                        <td><%= item.IsEnabled %></td>
                        <td><%= item.IsRunning %></td>

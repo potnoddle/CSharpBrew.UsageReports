@@ -10,6 +10,6 @@
 namespace CSharpBrew.UsageReports.Pages {
     
     
-    public partial class BackgroundTasksReport {
+    public partial class ScheduledJobs {
     }
 }

@@ -18,11 +18,11 @@ namespace CSharpBrew.UsageReports
     {
         internal static IEnumerable<PlugInReportItem> GetPluginReport()
         {
-            return from asemb in AppDomain.CurrentDomain.GetAssemblies()
-                   from type in asemb.GetTypes()
-                   where !asemb.FullName.StartsWith("EPiServer")
+            return from ass in AppDomain.CurrentDomain.GetAssemblies()
+                   from type in ass.GetTypes()
+                   where !ass.FullName.StartsWith("EPiServer")
                    from attrib in type.GetCustomAttributes(true).OfType<PlugInAttribute>()
-                   where !(attrib is GuiPlugInAttribute) && !type.FullName.Contains("CSharpBrew.UsageReports")
+                   where !(attrib is GuiPlugInAttribute) && !type.FullName.Contains(typeof(UsageReportsService).Namespace)
                    orderby attrib.SortIndex
                    select new PlugInReportItem
                    {
@@ -33,17 +33,17 @@ namespace CSharpBrew.UsageReports
                    };
         }
 
-        internal static IEnumerable<BackgroundTasksReportItem> GetBackgroundTasksReport()
+        internal static IEnumerable<ScheduledJobsReportItem> GetScheduledJobs()
         {
             var scheduledJobRepo = ServiceLocator.Current.GetInstance<ScheduledJobRepository>();
             return from job in scheduledJobRepo.List()
                    let plugInDescriptor = PlugInDescriptor.Load(job.TypeName, job.AssemblyName)
-                   where plugInDescriptor != null
+                   where plugInDescriptor != null && !plugInDescriptor.GetType().FullName.Contains(typeof(UsageReportsService).Namespace)
                    let attrib = GetAttribute(plugInDescriptor)
                    where attrib != null
-                   select new BackgroundTasksReportItem
+                   select new ScheduledJobsReportItem
                    {
-                       BackGroundTaskName = attrib.DisplayName,
+                       scheduledjobsJobName = attrib.DisplayName,
                        FullName = plugInDescriptor.GetType().FullName,
                        Description = attrib.Description,
                        SortIndex = attrib.SortIndex,
@@ -55,6 +55,12 @@ namespace CSharpBrew.UsageReports
                        IntervalLength = job.IntervalLength,
                        ID = job.ID
                    };
+        }
+
+        internal static IEnumerable<ContentType> GetContentTypes()
+        {
+            var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
+            return contentTypeRepo.List();
         }
 
         internal static IEnumerable<ContentPropertiesReportItem> GetPagePropertiesReport()

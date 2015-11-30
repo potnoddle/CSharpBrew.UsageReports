@@ -210,26 +210,26 @@ function HandlePublishError {
 
 	# Run NuGet Setup
 	$encodedMessage = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($ErrorMessage))
-	$setupTask = Start-Process PowerShell.exe "-ExecutionPolicy Unrestricted -File .\NuGetSetup.ps1 -Url $url -Base64EncodedMessage $encodedMessage" -Wait -PassThru
+	$setupJob = Start-Process PowerShell.exe "-ExecutionPolicy Unrestricted -File .\NuGetSetup.ps1 -Url $url -Base64EncodedMessage $encodedMessage" -Wait -PassThru
 
-	#Write-Log ("NuGet Setup Task Exit Code: " + $setupTask.ExitCode)
+	#Write-Log ("NuGet Setup Job Exit Code: " + $setupJob.ExitCode)
 
-	if ($setupTask.ExitCode -eq 0) {
+	if ($setupJob.ExitCode -eq 0) {
 		# Try to push package again
-		$publishTask = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
-		$publishTask.Start() | Out-Null
-		$publishTask.WaitForExit()
+		$publishJob = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
+		$publishJob.Start() | Out-Null
+		$publishJob.WaitForExit()
 			
-		$output = ($publishTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-		$error = (($publishTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+		$output = ($publishJob.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
+		$error = (($publishJob.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 		Write-Log $output
 		Write-Log $error Error
 
-		if ($publishTask.ExitCode -eq 0) {
+		if ($publishJob.ExitCode -eq 0) {
 			$global:ExitCode = 0
 		}
 	}
-	elseif ($setupTask.ExitCode -eq 2) {
+	elseif ($setupJob.ExitCode -eq 2) {
 		$global:ExitCode = 2
 	}
 	else {
@@ -253,16 +253,16 @@ function Publish {
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
 			
 			# Try to push package
-			$task = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
-			$task.Start() | Out-Null
-			$task.WaitForExit()
+			$Job = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
+			$Job.Start() | Out-Null
+			$Job.WaitForExit()
 			
-			$output = ($task.StandardOutput.ReadToEnd() -Split '[\r\n]') |? { $_ }
-			$error = ($task.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
+			$output = ($Job.StandardOutput.ReadToEnd() -Split '[\r\n]') |? { $_ }
+			$error = ($Job.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
 			Write-Log $output
 			Write-Log $error Error
 		   
-			if ($task.ExitCode -gt 0) {
+			if ($Job.ExitCode -gt 0) {
 				HandlePublishError -ErrorMessage $error
 				#Write-Log ("HandlePublishError() Exit Code: " + $global:ExitCode)
 			}
@@ -285,13 +285,13 @@ Set-ItemProperty NuGet.exe -Name IsReadOnly -Value $false
 if (Test-Path *.nupkg) {
 	Set-ItemProperty *.nupkg -Name IsReadOnly -Value $false
 
-	Write-Log " "
-	Write-Log "Creating backup..." -ForegroundColor Green
+	#Write-Log " "
+	#Write-Log "Creating backup..." -ForegroundColor Green
 
-	Get-ChildItem *.nupkg | ForEach-Object { 
-		Move-Item $_.Name ($_.Name + ".bak") -Force
-		Write-Log ("Renamed " + $_.Name + " to " + $_.Name + ".bak")
-	}
+	#Get-ChildItem *.nupkg | ForEach-Object { 
+	#	Move-Item $_.Name ($_.Name + ".bak") -Force
+	#	Write-Log ("Renamed " + $_.Name + " to " + $_.Name + ".bak")
+	#}
 }
 $Properties = Get-NuSpecTokenProps
 
@@ -307,29 +307,29 @@ Write-Log "Creating package..." -ForegroundColor Green
 
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	Write-Log "pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties"
-	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties")
-	$packageTask.Start() | Out-Null
-	$packageTask.WaitForExit()
+	$packageJob = Create-Process .\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed -Prop $Properties")
+	$packageJob.Start() | Out-Null
+	$packageJob.WaitForExit()
 			
-	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$error = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	$output = ($packageJob.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
+	$error = (($packageJob.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 	Write-Log $output
 	Write-Log $error Error
 
-	$global:ExitCode = $packageTask.ExitCode
+	$global:ExitCode = $packageJob.ExitCode
 }
 Else {
 	Write-Log "pack Package.nuspec -Verbosity Detailed -Prop ""$Properties"""
-	$packageTask = Create-Process .\NuGet.exe ("pack Package.nuspec -Verbosity Detailed -Prop ""$Properties""")
-	$packageTask.Start() | Out-Null
-	$packageTask.WaitForExit()
+	$packageJob = Create-Process .\NuGet.exe ("pack Package.nuspec -Verbosity Detailed -Prop ""$Properties""")
+	$packageJob.Start() | Out-Null
+	$packageJob.WaitForExit()
 			
-	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$error = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	$output = ($packageJob.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
+	$error = (($packageJob.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 	Write-Log $output
 	Write-Log $error Error
 
-	$global:ExitCode = $packageTask.ExitCode
+	$global:ExitCode = $packageJob.ExitCode
 }
 
 # Check if package should be published

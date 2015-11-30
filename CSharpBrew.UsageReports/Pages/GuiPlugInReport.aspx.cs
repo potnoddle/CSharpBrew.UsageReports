@@ -34,20 +34,7 @@ namespace CSharpBrew.UsageReports.Pages
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
             ReportItems = UsageReportsService.GetGuiPlugInReport();
-
-            if (!string.IsNullOrEmpty(Request["r"]))
-            {
-                switch (Request["r"])
-                {
-                    case "json":
-                        Response.Write(JsonConvert.SerializeObject(ReportItems));
-                        Response.ContentType = "application/json";
-                        Response.End();
-                        break;
-                }
-            }
         }
     }
 }

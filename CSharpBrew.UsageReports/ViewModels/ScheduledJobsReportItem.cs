@@ -3,9 +3,9 @@ using System;
 
 namespace CSharpBrew.UsageReports.ViewModels
 {
-    public class BackgroundTasksReportItem
+    public class ScheduledJobsReportItem
     {
-        public string BackGroundTaskName { get; set; }
+        public string scheduledjobsJobName { get; set; }
 
         public string FullName { get; set; }
 

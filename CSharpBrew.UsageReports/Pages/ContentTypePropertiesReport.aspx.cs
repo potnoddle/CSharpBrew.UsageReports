@@ -32,18 +32,6 @@ namespace CSharpBrew.UsageReports.Pages
         {
             base.OnLoad(e);
             ReportItems =  UsageReportsService.GetPagePropertiesReport();
-
-            if (!string.IsNullOrEmpty(Request["r"]))
-            {
-                switch (Request["r"])
-                {
-                    case "json":
-                        Response.Write(JsonConvert.SerializeObject(ReportItems));
-                        Response.ContentType = "application/json";
-                        Response.End();
-                        break;
-                }
-            }
         }
     }
 }
