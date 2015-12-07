@@ -1,19 +1,10 @@
 ﻿using CSharpBrew.UsageReports.ViewModels;
 using EPiServer;
-using EPiServer.Core;
-using EPiServer.Data.Dynamic;
-using EPiServer.DataAbstraction;
-using EPiServer.Filters;
 using EPiServer.PlugIn;
 using EPiServer.Security;
-using EPiServer.ServiceLocation;
 using EPiServer.Shell.WebForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace CSharpBrew.UsageReports.Pages
 {

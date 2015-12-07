@@ -3,7 +3,6 @@ using EPiServer;
 using EPiServer.PlugIn;
 using EPiServer.Security;
 using EPiServer.Shell.WebForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 

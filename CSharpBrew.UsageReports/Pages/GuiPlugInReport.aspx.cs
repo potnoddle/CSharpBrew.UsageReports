@@ -3,12 +3,8 @@ using EPiServer;
 using EPiServer.PlugIn;
 using EPiServer.Security;
 using EPiServer.Shell.WebForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace CSharpBrew.UsageReports.Pages
 {

@@ -1,14 +1,10 @@
 ﻿using CSharpBrew.UsageReports.ViewModels;
 using EPiServer;
-using EPiServer.DataAbstraction;
 using EPiServer.PlugIn;
 using EPiServer.Security;
-using EPiServer.ServiceLocation;
 using EPiServer.Shell.WebForms;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CSharpBrew.UsageReports.Pages
 {

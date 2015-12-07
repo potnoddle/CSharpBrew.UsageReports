@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CSharpBrew.UsageReports</id>
-    <version>1.0.3.5</version>
+    <version>1.0.3.17</version>
     <title>CSharp Brew UsageReports</title>
     <authors>Paul Graham</authors>
     <owners></owners>
@@ -20,7 +20,9 @@
     <dependencies>
       <group targetFramework="net40">
         <dependency id="log4net" version="1.2.10" />
-        <dependency id="EPiServer.CMS.Core" version="[7.6.0,9)" />
+        <dependency id="Newtonsoft.Json" version="[6.0.1,8)" />
+        <dependency id="DotNetZip"  version="[1.9.1.8, 2)"/>
+        <dependency id="EPiServer.CMS.Core" version="[7.6,8)" />
       </group>
     </dependencies>
     <references></references>

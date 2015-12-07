@@ -8,9 +8,8 @@ namespace CSharpBrew.UsageReports.Media
     [MediaDescriptor(ExtensionString = ".zip")]
     public class ZippedFile : MediaData
     {
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
         public virtual string Description { get; set; }
+
+        public override string MimeType => "application/zip, application/octet-stream";
     }
 }
