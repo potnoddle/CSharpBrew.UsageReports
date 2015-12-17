@@ -26,7 +26,7 @@
       </group>
     </dependencies>
     <references></references>
-    <tags></tags>
+    <tags>EPiServer CMS Reports</tags>
   </metadata>
   <files>
     <file src="..\CSharpBrew.UsageReports\bin\$Configuration$\CSharpBrew.UsageReports.dll" target="lib\net45" />
