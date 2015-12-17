@@ -192,42 +192,36 @@
     <Compile Include="Media\ZippedFile.cs" />
     <Compile Include="Pages\ScheduledJobsReport.aspx.cs">
       <DependentUpon>ScheduledJobsReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ScheduledJobsReport.aspx.designer.cs">
       <DependentUpon>ScheduledJobsReport.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\ContentByTypeReport.aspx.cs">
       <DependentUpon>ContentByTypeReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ContentByTypeReport.aspx.designer.cs">
       <DependentUpon>ContentByTypeReport.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\GuiPlugInReport.aspx.cs">
       <DependentUpon>GuiPlugInReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\GuiPlugInReport.aspx.designer.cs">
       <DependentUpon>GuiPlugInReport.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\ContentTypePropertiesReport.aspx.cs">
       <DependentUpon>ContentTypePropertiesReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ContentTypePropertiesReport.aspx.designer.cs">
       <DependentUpon>ContentTypePropertiesReport.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\ContentTypeUsageReport.aspx.cs">
       <DependentUpon>ContentTypeUsageReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\ContentTypeUsageReport.aspx.designer.cs">
       <DependentUpon>ContentTypeUsageReport.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\PlugInReport.aspx.cs">
       <DependentUpon>PlugInReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\PlugInReport.aspx.designer.cs">
       <DependentUpon>PlugInReport.aspx.cs</DependentUpon>
