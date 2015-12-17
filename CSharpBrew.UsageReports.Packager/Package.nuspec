@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CSharpBrew.UsageReports</id>
-    <version>1.0.3.21</version>
+    <version>1.0.3.22</version>
     <title>CSharp Brew UsageReports</title>
     <authors>Paul Graham</authors>
     <owners></owners>
