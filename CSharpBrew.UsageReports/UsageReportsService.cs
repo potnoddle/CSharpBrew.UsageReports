@@ -63,7 +63,7 @@ namespace CSharpBrew.UsageReports
             return contentTypeRepo.List();
         }
 
-        internal static IEnumerable<ContentPropertiesReportItem> GetPagePropertiesReport()
+        internal static IEnumerable<ContentPropertiesReportItem> GetContentPropertiesReport()
         {
             var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
             var templateModelRepo = ServiceLocator.Current.GetInstance<TemplateModelRepository>();
@@ -74,12 +74,18 @@ namespace CSharpBrew.UsageReports
                    let avt = ct.GetType().GetCustomAttributes(true).OfType<AvailableContentTypesAttribute>().FirstOrDefault()
                    let aa = ct.GetType().GetCustomAttributes(true).OfType<AccessAttribute>().FirstOrDefault()
                    let iua = ct.GetType().GetCustomAttributes(true).OfType<ImageUrlAttribute>().FirstOrDefault()
+                   let IsPage = (t is PageType)
+                   let IsBlock = (t is BlockType)
+                   let IsMedia = (!IsPage && IsBlock)
                    select new ContentPropertiesReportItem
                    {
                        ID = t.ID,
                        GUID = t.GUID,
                        ContentTypeName = t.Name,
                        ModelType = t.ModelType.Name,
+                       IsPage = IsPage,
+                       IsBlock = IsBlock,
+                       IsMedia = IsMedia,
                        GroupName = t.GroupName,
                        Available = t.IsAvailable,
                        Description = t.Description,

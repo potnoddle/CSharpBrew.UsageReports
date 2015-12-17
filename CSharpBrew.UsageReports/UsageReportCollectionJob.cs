@@ -40,29 +40,29 @@ namespace CSharpBrew.UsageReports
 
             using (ZipFile loanZip = new ZipFile())
             {
-                loanZip.AddEntry("scheduledjobs-usage-report.json", 
+                loanZip.AddEntry("scheduledjobs-report.json",
                     JsonConvert.SerializeObject(UsageReportsService.GetScheduledJobs(),
                     Formatting.Indented),
                     Encoding.UTF8);
 
-                loanZip.AddEntry("content-usage-report.json", 
-                    JsonConvert.SerializeObject(UsageReportsService.GetContentTypesUsage(), 
-                    Formatting.Indented), 
-                    Encoding.UTF8);
-
-                loanZip.AddEntry("guiplugin-usage-report.json", 
-                    JsonConvert.SerializeObject(UsageReportsService.GetGuiPlugInReport(),
-                    Formatting.Indented), 
-                    Encoding.UTF8);
-
-                loanZip.AddEntry("pageproperties-usage-report.json",
-                    JsonConvert.SerializeObject(UsageReportsService.GetPagePropertiesReport(), 
+                loanZip.AddEntry("content-report.json",
+                    JsonConvert.SerializeObject(UsageReportsService.GetContentTypesUsage(),
                     Formatting.Indented),
                     Encoding.UTF8);
 
-                loanZip.AddEntry("plugIn-usage-report.json", 
-                    JsonConvert.SerializeObject(UsageReportsService.GetPluginReport(), 
-                    Formatting.Indented), 
+                loanZip.AddEntry("guiplugin-report.json",
+                    JsonConvert.SerializeObject(UsageReportsService.GetGuiPlugInReport(),
+                    Formatting.Indented),
+                    Encoding.UTF8);
+
+                loanZip.AddEntry("contentproperties-report.json",
+                    JsonConvert.SerializeObject(UsageReportsService.GetContentPropertiesReport(),
+                    Formatting.Indented),
+                    Encoding.UTF8);
+
+                loanZip.AddEntry("plugIn-report.json",
+                    JsonConvert.SerializeObject(UsageReportsService.GetPluginReport(),
+                    Formatting.Indented),
                     Encoding.UTF8);
 
                 var newReport = contentRepository.GetDefault<ZippedFile>(assetRoot);
