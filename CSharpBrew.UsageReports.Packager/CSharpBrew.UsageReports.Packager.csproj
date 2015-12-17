@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="UpdateVersion.ps1" />
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />

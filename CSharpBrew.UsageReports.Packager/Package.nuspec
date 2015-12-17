@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CSharpBrew.UsageReports</id>
-    <version>1.0.3.17</version>
+    <version>1.0.3.21</version>
     <title>CSharp Brew UsageReports</title>
     <authors>Paul Graham</authors>
     <owners></owners>
@@ -26,7 +26,7 @@
       </group>
     </dependencies>
     <references></references>
-    <tags></tags>
+    <tags>EPiServer CMS Reports</tags>
   </metadata>
   <files>
     <file src="..\CSharpBrew.UsageReports\bin\$Configuration$\CSharpBrew.UsageReports.dll" target="lib\net45" />

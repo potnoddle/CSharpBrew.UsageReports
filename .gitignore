@@ -9,3 +9,4 @@ packages/
 *.bak
 *.nupkg
 *.log
+CSharpBrew.UsageReports.Packager/NuGet.log
