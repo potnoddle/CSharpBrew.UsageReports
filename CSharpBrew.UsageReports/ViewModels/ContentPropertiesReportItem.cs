@@ -50,5 +50,11 @@ namespace CSharpBrew.UsageReports.ViewModels
         public string Availability { get; internal set; }
 
         public string[] SupportedTemplates { get; internal set; }
+
+        public bool IsPage { get; internal set; }
+
+        public bool IsBlock { get; internal set; }
+
+        public bool IsMedia { get; internal set; }
     }
 }
