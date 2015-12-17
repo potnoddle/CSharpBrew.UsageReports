@@ -67,7 +67,6 @@ namespace CSharpBrew.UsageReports
         {
             var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
             var templateModelRepo = ServiceLocator.Current.GetInstance<TemplateModelRepository>();
-            //propertyTypeRepo.Load()
             return from t in contentTypeRepo.List().OrderBy(t => t.SortOrder)
                    let ct = t.ModelType
                    where ct != null
