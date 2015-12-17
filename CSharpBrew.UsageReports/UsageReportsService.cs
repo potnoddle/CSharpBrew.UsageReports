@@ -76,7 +76,7 @@ namespace CSharpBrew.UsageReports
                    let iua = ct.GetType().GetCustomAttributes(true).OfType<ImageUrlAttribute>().FirstOrDefault()
                    let IsPage = (t is PageType)
                    let IsBlock = (t is BlockType)
-                   let IsMedia = (!IsPage && IsBlock)
+                   let IsMedia = (!IsPage && !IsBlock)
                    select new ContentPropertiesReportItem
                    {
                        ID = t.ID,
@@ -137,7 +137,7 @@ namespace CSharpBrew.UsageReports
                    let pages = usage.OfType<PageData>()
                    let IsPage = (contentType is PageType)
                    let IsBlock = (contentType is BlockType)
-                   let IsMedia = (!IsPage && IsBlock)
+                   let IsMedia = (!IsPage && !IsBlock)
                    orderby !IsBlock
                    orderby !IsPage
                    select new ContentTypeUsageReportItem
