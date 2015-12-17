@@ -30,7 +30,7 @@ namespace CSharpBrew.UsageReports.Pages
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            ReportItems =  UsageReportsService.GetPagePropertiesReport();
+            ReportItems =  UsageReportsService.GetContentPropertiesReport();
         }
     }
 }

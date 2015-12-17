@@ -63,7 +63,7 @@ namespace CSharpBrew.UsageReports
             return contentTypeRepo.List();
         }
 
-        internal static IEnumerable<ContentPropertiesReportItem> GetPagePropertiesReport()
+        internal static IEnumerable<ContentPropertiesReportItem> GetContentPropertiesReport()
         {
             var contentTypeRepo = ServiceLocator.Current.GetInstance<IContentTypeRepository>();
             var templateModelRepo = ServiceLocator.Current.GetInstance<TemplateModelRepository>();
